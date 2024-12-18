@@ -85,6 +85,7 @@ def delete_choice():
     choice = input("Введите id контакта, который желаете удалить: ")
     return choice.lower()
 
+
 def delete_confirmation():
     answer = input("Удалить данный контакт (y/n) ?")
     return answer.lower()
