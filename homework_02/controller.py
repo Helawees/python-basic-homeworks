@@ -4,7 +4,9 @@ import sys
 
 filepath = 'phonebook.json'
 
+
 def process_action_menu(phonebook_object):
+    """Обработка пользовательского выбора вариантов во внутреннем меню."""
     flag_menu = True
     while flag_menu:
         input_choice = view.print_action_menu()
@@ -17,19 +19,25 @@ def process_action_menu(phonebook_object):
         else:
             view.print_incorrect_input()
 
+
 def process_menu(phonebook_object):
+    """Обработка выбора пользователя в основном меню справочника."""
+
     flag_menu = True
     while flag_menu:
         choice = view.print_menu()
+
         if choice == "1": #вывод меню
             flag_menu = False
             view.print_data(phonebook_object.data)
             process_action_menu(phonebook_object)
+
         elif choice == "2": #поиск контакта
             flag_menu = False
             result = phonebook_object.find_contact(view.get_search_criteria())
             view.print_data(result)
             process_action_menu(phonebook_object)
+
         elif choice == "3": #добавить контакт
             flag_menu = False
             try:
@@ -47,6 +55,7 @@ def process_menu(phonebook_object):
                 else:
                     view.print_added_success(phonebook_object.data[new_id]['name'])
             process_action_menu(phonebook_object)
+
         elif choice == "4": #редактировать контакт
             flag_menu = False
             result = phonebook_object.find_contact(view.get_search_criteria())
@@ -62,6 +71,7 @@ def process_menu(phonebook_object):
                     view.print_incorrect_input()
                     process_action_menu(phonebook_object)
             process_action_menu(phonebook_object)
+
         elif choice == "5": #удалить контакт
             flag_menu = False
             contact_to_delete = phonebook_object.find_contact(view.get_search_criteria())
@@ -93,6 +103,9 @@ def process_menu(phonebook_object):
         else:
             view.print_incorrect_input()
 
+
 def run_app():
+    """Запуск приложения: создание менеджера телефонной книги и вывод меню справочника."""
+
     phonebook_object = PhoneBook(filepath)
     process_menu(phonebook_object)
